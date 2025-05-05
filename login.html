@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Peralta&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: white;
+    }
+
+    .container {
+      display: flex;
+      width: 80%;
+      max-width: 1000px;
+      height: 80vh;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .image-section {
+      flex: 1;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 40px;
+      background: white;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 20px;
+      color: gray;
+    }
+
+    hr {
+      width: 50%;
+      margin: 10px auto;
+      border: 0.5px solid black;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      align-self: flex-start;
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 20px;
+    }
+
+    .forgot-password {
+      font-size: 16px;
+      color: red;
+      text-decoration: none;
+      align-self: flex-start;
+      margin-top: 5px;
+    }
+
+    button {
+      font-family: "Peralta", serif;
+      margin-top: 20px;
+      background: gray;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: black;
+    }
+
+    .re-es-logo-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-family: "Ceviche One";
+      font-size: 28px;
+      font-style: italic;
+    }
+
+    .re-es-logo-container a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    #admin-section {
+      margin-top: 20px;
+    }
+
+    .admin-btn {
+      font-family: "Peralta", serif;
+      background: #f1ecff;
+      color: #000;
+      padding: 10px 25px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .admin-btn:hover {
+      background-color: black;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .image-section {
+        height: 300px;
+      }
+
+      .image-section img {
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Left RE-ES Logo -->
+<div class="re-es-logo-container">
+  <a href="homepage.html">RE-ES</a>
+</div>
+
+<div class="container">
+  <div class="image-section">
+    <img src="img/wine.jpeg" alt="Candlelit dinner">
+  </div>
+  <div class="form-section">
+    <h2>Login</h2>
+    <p>Login to continue</p>
+    <hr>
+    <form onsubmit="return validateForm()">
+      <label for="email">Please enter Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="password">Please enter password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+
+      <a href="forgotPassword.html" class="forgot-password">Forgot password?</a>
+
+      <button type="submit">LOGIN</button>
+    </form>
+
+    <!-- Admin button section -->
+    <div id="admin-section"></div>
+  </div>
+</div>
+
+<script>
+  function validateForm() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    const users = [
+      { name: "Admin", email: "bimandibosilu@gmail.com, password: "admin123", role: "admin" },
+      { name: "Admin", email: "user@example.com", password: "user1234", role: "admin" },
+      { name: "Admin", email: "user@example.com", password: "user12345", role: "admin" },
+      { name: "Admin", email: "user@example.com", password: "user123456", role: "admin" },
+      { name: "Admin", email: "user@example.com", password: "user1234567", role: "admin" },
+      { name: "Admin", email: "user@example.com", password: "user12345678", role: "admin" }
+    ];
+
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (!user) {
+      alert("Invalid email or password.");
+      return false;
+    }
+
+    // Save logged-in user info
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+
+    alert("Login successful!");
+
+    // Optionally redirect to profile page
+    // window.location.href = "profile.html";
+
+    // Show admin button if admin
+    if (user.role === "admin") {
+      showAdminButton();
+    }
+
+    return false; // prevent form from submitting
+  }
+
+  function showAdminButton() {
+    const adminBtn = document.createElement("a");
+    adminBtn.href = "admin-users.html";
+    adminBtn.textContent = "Manage Users";
+    adminBtn.className = "admin-btn";
+    document.getElementById("admin-section").appendChild(adminBtn);
+  }
+
+  // Auto-show admin button if already logged in
+  const loggedUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  if (loggedUser && loggedUser.role === "admin") {
+    showAdminButton();
+  }
+</script>
+</body>
+</html>

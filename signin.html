@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Peralta&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: white;
+    }
+
+    .container {
+      display: flex;
+      width: 80%;
+      max-width: 1000px;
+      height: 80vh;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .image-section {
+      flex: 1;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 40px;
+      background: white;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 18px;
+      color: gray;
+    }
+
+    hr {
+      width: 50%;
+      margin: 10px auto;
+      border: 0.5px solid black;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      align-self: flex-start;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+
+    button {
+      font-family: "Peralta", serif;
+      margin-top: 20px;
+      background: gray;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: black;
+    }
+
+    .re-es-logo-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-family: "Ceviche One";
+      font-size: 28px;
+      font-style: italic;
+    }
+
+    .re-es-logo-container a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .image-section {
+        height: 300px;
+      }
+
+      .image-section img {
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Left RE-ES Logo -->
+<div class="re-es-logo-container">
+  <a href="homepage.html">RE-ES</a>
+</div>
+
+<div class="container">
+  <div class="image-section">
+    <img src="img/wine.jpeg" alt="Candlelit dinner">
+  </div>
+  <div class="form-section">
+    <h2>Create New Account</h2>
+    <p>Already registered? <a href="login.html">LOGIN</a></p>
+    <hr>
+    <form onsubmit="return validateForm()">
+      <label for="name">Please enter your name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="email">Please enter Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="phone">Please enter phone number</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+      <label for="password">Please enter password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+
+      <label for="dob">Please enter date of birth</label>
+      <input type="date" id="dob" required>
+
+      <button type="submit">CREATE</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function validateForm() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var password = document.getElementById("password").value;
+    var dob = document.getElementById("dob").value;
+
+    if (!name || !email || !phone || !password || !dob) {
+      alert("All fields are required!");
+      return false;
+    }
+
+    return true;
+  }
+</script>
+</body>
+</html>
